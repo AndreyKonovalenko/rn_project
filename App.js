@@ -16,12 +16,25 @@ export default class App extends Component {
     });
   };
 
+  placeDeletedHundler = index => {
+    this.setState(prevState => {
+      return {
+        places: prevState.places.filter((element, i) => {
+          return i !== index;
+        })
+      };
+    });
+  };
+
   render() {
     return (
       <View style={styles.container}>
         <Text>MY NEW APP</Text>
         <PlaceInput onPlaceAdded={this.placeAddHandler} />
-        <PlaceList listData={this.state.places} />
+        <PlaceList
+          listData={this.state.places}
+          onItemDeleted={this.placeDeletedHundler}
+        />
       </View>
     );
   }
