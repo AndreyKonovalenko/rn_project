@@ -11,16 +11,19 @@ export default class App extends Component {
   placeAddHandler = placeName => {
     this.setState(prevState => {
       return {
-        places: prevState.places.concat(placeName)
+        places: prevState.places.concat({
+          key: 'uniq key is: ' + Math.random(),
+          value: placeName
+        })
       };
     });
   };
 
-  placeDeletedHundler = index => {
+  placeDeletedHundler = key => {
     this.setState(prevState => {
       return {
-        places: prevState.places.filter((element, i) => {
-          return i !== index;
+        places: prevState.places.filter(element => {
+          return element.key !== key;
         })
       };
     });
