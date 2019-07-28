@@ -3,10 +3,12 @@ import { StyleSheet, Text, View } from 'react-native';
 import PlaceInput from './src/components/PlaceInput/PlaceInput';
 import PlaceList from './src/components/PlaceList/PlaceList';
 import placeImage from './src/assets/picture_1.jpg';
+import PlaceDetail from './src/components/PlaceDetail/PlaceDetail';
 
 export default class App extends Component {
   state = {
-    places: []
+    places: [],
+    selectedPlace: null
   };
 
   placeAddHandler = placeName => {
@@ -24,11 +26,26 @@ export default class App extends Component {
     });
   };
 
-  placeDeletedHundler = key => {
+  placeDeleteHandler = () => {
     this.setState(prevState => {
       return {
         places: prevState.places.filter(element => {
-          return element.key !== key;
+          return element.key !== prevState.selectedPlace.key;
+        }),
+        selectedPlace: null
+      };
+    });
+  };
+  modelCloseHandler = () => {
+    this.setState({
+      selectedPlace: null
+    });
+  };
+  placeSelectHundler = key => {
+    this.setState(prevState => {
+      return {
+        selectedPlace: prevState.places.find(element => {
+          return element.key === key;
         })
       };
     });
@@ -38,10 +55,15 @@ export default class App extends Component {
     return (
       <View style={styles.container}>
         <Text>MY NEW APP</Text>
+        <PlaceDetail
+          selectedPlace={this.state.selectedPlace}
+          onItemDeleted={this.placeDeleteHandler}
+          onModalClosed={this.modelCloseHandler}
+        />
         <PlaceInput onPlaceAdded={this.placeAddHandler} />
         <PlaceList
           listData={this.state.places}
-          onItemDeleted={this.placeDeletedHundler}
+          onItemSelected={this.placeSelectHundler}
         />
       </View>
     );
