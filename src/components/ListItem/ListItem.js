@@ -14,7 +14,7 @@ const ListItem = props => (
   <TouchableOpacity onPress={props.onItemPressed}>
     <View style={styles.listItem}>
       <Image
-        rasizeMode='cover'
+        resizeMode='cover'
         source={props.placeImage}
         style={styles.placeImage}
       />

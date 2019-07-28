@@ -15,7 +15,10 @@ export default class App extends Component {
         places: prevState.places.concat({
           key: 'uniq key is: ' + Math.random(),
           name: placeName,
-          image: placeImage
+          image: {
+            uri:
+              'https://upload.wikimedia.org/wikipedia/commons/1/1e/San_Francisco_from_the_Marin_Headlands_in_March_2019.jpg'
+          }
         })
       };
     });
