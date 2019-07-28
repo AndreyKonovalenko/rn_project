@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlatList, StyleSheet, ScrollView } from 'react-native';
-import ListItem from './../ListItem/ListItem';
+import ListItem from '../ListItem/ListItem';
 
 const PlaceList = props => {
   return (
@@ -9,7 +9,8 @@ const PlaceList = props => {
       data={props.listData}
       renderItem={info => (
         <ListItem
-          placeName={info.item.value}
+          placeName={info.item.name}
+          placeImage={info.item.image}
           onItemPressed={() => props.onItemDeleted(info.item.key)}
         />
       )}
