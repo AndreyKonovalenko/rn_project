@@ -5,9 +5,12 @@ import placesReducer from './reducers/placesReducer';
 const rootReducer = combineReducers({
   places: placesReducer
 });
-const composeEnhancers = __DEV__
-  ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-  : null || compose;
+
+let composeEnhancers = compose;
+
+if (__DEV__) {
+  composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+}
 
 const configureStore = () => {
   return createStore(rootReducer, composeEnhancers());
